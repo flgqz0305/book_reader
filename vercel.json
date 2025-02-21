@@ -11,7 +11,22 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/reading-expert-backend/index.js"
+      "dest": "reading-expert-backend/index.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/reading-expert-frontend/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/reading-expert-frontend/build/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/reading-expert-frontend/build/manifest.json"
     },
     {
       "src": "/(.*)",
