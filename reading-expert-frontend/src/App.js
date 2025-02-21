@@ -4,7 +4,7 @@ import ReadingPane from './ReadingPane';
 import './App.css';
 
 const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/qa'  // This will map to /api/qa.js
+  ? 'https://reading-expert-backend.vercel.app/api/qa'
   : 'http://localhost:3001/api/qa';
 
 function App() {
@@ -30,12 +30,17 @@ function App() {
       const response = await axios.post(API_URL, {
         context,
         question: questionToSend,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
       const answer = response.data.answer;
       const assistantMessage = { role: 'assistant', content: answer };
       setChatMessages(prev => [...prev, assistantMessage]);
     } catch (err) {
       console.error("Error fetching answer:", err);
+      console.log("Error details:", err.response?.data);
       const errorMsg = { role: 'assistant', content: "Sorry, there was an error fetching the answer." };
       setChatMessages(prev => [...prev, errorMsg]);
     } finally {
