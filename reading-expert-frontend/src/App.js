@@ -4,7 +4,7 @@ import ReadingPane from './ReadingPane';
 import './App.css';
 
 const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/qa'  // Use relative path for same-domain requests
+  ? '/api/qa'  // This will map to /api/qa.js
   : 'http://localhost:3001/api/qa';
 
 function App() {
