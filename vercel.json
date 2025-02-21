@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "buildCommand": "cd reading-expert-frontend && npm install && npm run build",
+  "outputDirectory": "reading-expert-frontend/build",
+  "builds": [
+    {
+      "src": "reading-expert-backend/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/reading-expert-backend/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/reading-expert-frontend/build/index.html"
+    }
+  ]
+}
+  
