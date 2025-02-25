@@ -1,15 +1,24 @@
 {
   "version": 2,
-  "framework": "create-react-app",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
-    }
-  ],
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "nodeVersion": "16.x",
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/[^.]+", "dest": "index.html" }
+    {
+      "src": "/static/(.*)",
+      "headers": { "cache-control": "public, max-age=31536000, immutable" },
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/manifest.json",
+      "headers": { "cache-control": "public, max-age=0, must-revalidate" },
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/(.*)",
+      "headers": { "cache-control": "s-maxage=1,stale-while-revalidate" },
+      "dest": "/index.html"
+    }
   ]
 } 
